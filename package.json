@@ -1,0 +1,37 @@
+{
+  "name": "whamon",
+  "version": "1.0.0",
+  "description": "A blog system powered by original Node.js without any framework.",
+  "main": "scripts/index.js",
+  "repository": "git@github.com:tiyee/whamon.git",
+  "author": "tiyee <tiyee@live.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node": "^16.0.0"
+  },
+  "scripts": {
+    "pro": "export NODE_ENV=production; webpack   --mode=production",
+    "dev": "export NODE_ENV=development; webpack --mode=development "
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@babel/core": "latest",
+    "@babel/preset-env": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "babel-loader": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-react": "latest",
+    "prettier": "latest",
+    "terser-webpack-plugin": "latest",
+    "ts-loader": "latest",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "typescript": "latest",
+    "webpack": "latest",
+    "webpack-cli": "latest"
+  }
+}

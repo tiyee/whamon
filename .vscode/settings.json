@@ -1,0 +1,54 @@
+{
+  "editor.trimAutoWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/application":true,
+    "**/.idea":true,
+    "**/*.php":true
+  },
+  // Set the default
+  "editor.formatOnSave": false,
+
+  // Enable per-language
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  //"eslint.enable": true,  //是否开启vscode的eslint
+      //"eslint.autoFixOnSave": true, //是否在保存的时候自动fix eslint
+       "eslint.codeActionsOnSave.mode": "all",
+       "eslint.options": {    //指定vscode的eslint所处理的文件的后缀
+           "extensions": [
+               ".js",
+               ".vue",
+               ".ts",
+               ".tsx"
+           ]
+       },
+       "eslint.format.enable": true,
+
+       "eslint.validate": [
+           "javascriptreact",
+           "json",
+           "typescript",
+          "react"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.packageManager": "yarn",
+    "eslint.probe": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+        "vue",
+        "markdown",
+        "react"
+    ]
+}
