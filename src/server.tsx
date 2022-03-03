@@ -2,8 +2,7 @@
 
 import http from 'http'
 import {routers} from 'router'
-import {getCtx, IContext, setCtx} from 'context'
-import {resolve} from 'path/posix'
+import {getCtx, setCtx} from 'context'
 
 export const start = (hostname: string, port: number) => {
     const onRequest = (request: http.IncomingMessage, response: http.ServerResponse) => {
@@ -13,16 +12,16 @@ export const start = (hostname: string, port: number) => {
             uri = uri.slice(0, pos)
         }
         console.log('Request for ' + uri + ' received.')
-        const lk = routers(uri)
-        if (lk !== undefined) {
+        const links = routers(uri)
+        if (links !== undefined) {
             const ctx = getCtx(request, response)
-            let head = (async () => {
+            let link = (async () => {
                 return ctx
             })()
-            lk.forEach(fn => {
-                head = head.then(fn)
+            links.forEach(fn => {
+                link = link.then(fn)
             })
-            head.catch(e => {
+            link.catch(e => {
                 console.log(e)
                 return e
             }).finally(() => {

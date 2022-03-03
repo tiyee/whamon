@@ -1,7 +1,6 @@
 /** @format */
 
 import {IncomingMessage, ServerResponse} from 'http'
-import {buffer} from 'stream/consumers'
 const ctxPool = new Array<IContext>()
 export const getCtx = (request: IncomingMessage, response: ServerResponse): IContext => {
     if (ctxPool.length > 0) {
