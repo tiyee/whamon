@@ -7,6 +7,8 @@
   "author": "tiyee <tiyee@live.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/mysql": "^2.15.21",
+    "mysql": "^2.18.1",
     "node": "^16.0.0"
   },
   "scripts": {
