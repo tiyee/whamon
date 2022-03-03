@@ -2,7 +2,7 @@
 
 import http from 'http'
 import {routers} from 'router'
-import {getCtx, IContext} from 'context'
+import {getCtx, IContext, setCtx} from 'context'
 import {resolve} from 'path/posix'
 
 export const start = (hostname: string, port: number) => {
@@ -16,15 +16,18 @@ export const start = (hostname: string, port: number) => {
         const lk = routers(uri)
         if (lk !== undefined) {
             const ctx = getCtx(request, response)
-            let head: Promise<IContext> = new Promise(resolve => {
-                resolve(ctx)
-            })
+            let head = (async () => {
+                return ctx
+            })()
             lk.forEach(fn => {
                 head = head.then(fn)
             })
             head.catch(e => {
                 console.log(e)
-            }).finally()
+                return e
+            }).finally(() => {
+                setCtx(ctx)
+            })
         } else {
             response.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'})
             response.write('<html><body><center><h1>404 Not Found</h1></center></body></html>')

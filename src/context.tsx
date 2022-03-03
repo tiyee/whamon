@@ -2,20 +2,22 @@
 
 import {IncomingMessage, ServerResponse} from 'http'
 import {buffer} from 'stream/consumers'
-const ctxPool = new Array<Context>()
-export const getCtx = (request: IncomingMessage, response: ServerResponse): Context => {
+const ctxPool = new Array<IContext>()
+export const getCtx = (request: IncomingMessage, response: ServerResponse): IContext => {
     if (ctxPool.length > 0) {
         return ctxPool.pop()?.reset(request, response) ?? new Context(request, response)
     } else {
         return new Context(request, response)
     }
 }
-export const setCtx = (ctx: Context) => {
+export const setCtx = (ctx: IContext) => {
     ctxPool.push(ctx)
+    console.log(ctxPool.length)
 }
 export interface IContext {
     request: IncomingMessage
     response: ServerResponse
+    reset(request: IncomingMessage, response: ServerResponse): void
 }
 class Context implements IContext {
     request: IncomingMessage

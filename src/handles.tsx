@@ -21,3 +21,7 @@ export const defaultHanle: RouteHandle = async (ctx: IContext): Promise<IContext
     ctx.response.end()
     return ctx
 }
+export const demoMid: RouteHandle = async (ctx: IContext): Promise<IContext> => {
+    console.log('demo midleware')
+    return ctx
+}
