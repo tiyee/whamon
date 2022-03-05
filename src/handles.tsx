@@ -2,23 +2,21 @@
 
 import {IContext} from './context'
 import {RouteHandle} from './router'
-import {URL} from 'url'
-import {resolve} from 'path/posix'
-import {rejects} from 'assert'
 
 export const postHandle: RouteHandle = async (ctx: IContext): Promise<IContext> => {
-    const {host} = ctx.request.headers
-    const oUrl = new URL(ctx.request.url ?? '', `http://${host}`)
-    console.log(oUrl)
-    ctx.response.writeHead(200, {'Content-Type': 'text/plain'})
-    ctx.response.write('Hello World')
-    ctx.response.end()
+    console.log('begin')
+    // ctx.getFormPost().then((data)=>{
+    //     console.log('data',data)
+    // })
+    const x = await ctx.getFormPostAll()
+
+    console.log('end')
+    ctx.Success('ok', {'222': 1})
     return ctx
 }
 export const defaultHanle: RouteHandle = async (ctx: IContext): Promise<IContext> => {
-    ctx.response.writeHead(200, {'Content-Type': 'text/plain'})
-    ctx.response.write('Hello World')
-    ctx.response.end()
+    const people = ['geddy', 'neil', 'alex']
+    ctx.Render('xxx', {people})
     return ctx
 }
 export const demoMid: RouteHandle = async (ctx: IContext): Promise<IContext> => {

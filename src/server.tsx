@@ -5,7 +5,7 @@ import {routers} from 'router'
 import {getCtx, setCtx} from 'context'
 
 export const start = (hostname: string, port: number) => {
-    const onRequest = (request: http.IncomingMessage, response: http.ServerResponse) => {
+    const onRequest: http.RequestListener = (request: http.IncomingMessage, response: http.ServerResponse) => {
         let uri = request.url ?? ''
         const pos = uri.indexOf('?')
         if (pos !== -1) {
@@ -22,7 +22,7 @@ export const start = (hostname: string, port: number) => {
                 link = link.then(fn)
             })
             link.catch(e => {
-                console.log(e)
+                console.log('err:', e)
                 return e
             }).finally(() => {
                 setCtx(ctx)
