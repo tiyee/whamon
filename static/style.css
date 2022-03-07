@@ -1,0 +1,315 @@
+html, button, input, optgroup, select, textarea, body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    font-family: 'Saira Semi Condensed', sans-serif;
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+}
+
+html {
+    font-size: 16px
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    background: #fefefe;
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;
+    font-weight: normal;
+    line-height: 1.8;
+    /*color: #0a0a0a;*/
+    color: #1A1A1A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*font-size: medium;*/
+    max-width: 1004px;
+
+}
+
+a {
+    line-height: inherit;
+    color: #1779ba;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .2s;
+    margin:0 0.2rem
+
+}
+
+#header, #main, #footer {
+    width: 90%;
+    margin: 2rem 5%;
+}
+#header a{
+    font-weight: bolder;
+}
+#main > article {
+    margin: 1rem auto;
+}
+
+h1 > a {
+    color: #333333;
+
+}
+
+#main > article > .entry-content {
+    font-size: 1.0rem;
+    margin: 2em 0;
+}
+#main > article > .entry-content h1 {
+    font-size: 2.4rem;
+
+}
+#main > article > .entry-content h2 {
+    font-size: 2.0rem;
+    border-bottom: 1px solid #d3d3d3;
+    font-weight: 500;
+
+}
+#main > article > .entry-content h3 {
+    font-size: 1.6rem;
+
+}
+#main > article > .entry-content h4 {
+    font-size: 1.2rem;
+
+}
+
+#main > article > .entry-content > p > code , #main > article > .entry-content  li code {
+    padding: 0.1rem 0.2rem;
+    background-color: #f6f6f6;
+    border: none;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    vertical-align: middle;
+    color: #c7254e;
+    line-height: 1.5;
+
+    border-radius: 4px;
+}
+
+#main > article > .entry-content > p > strong, #main > article > .entry-content > p > b {
+    /*color: #ff0000;*/
+    color: #0a0a0a;
+    font-weight: bolder;
+    font-size: 120%;
+    margin: 0 0.2rem;
+}
+#main > article > .entry-content > p a {
+    /*color: #ff0000;*/
+    text-decoration: underline;
+    font-weight: 600;
+    margin: 0 .2rem;
+
+}
+#main > article > .entry-content > p a:hover {
+    /*color: #ff0000;*/
+    color: #44f;
+    font-style: italic;
+    margin:0 0.3rem;
+}
+/**
+
+ */
+ #main > article > .entry-content code:not([class*="language-"]) {
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 4px;
+    font-size: 90%;
+    display: inline-block;
+    line-height: 125%;
+    background-color: #f9f2f4;
+    vertical-align: middle;
+    color: #c7254e;
+    margin: 0 2px;
+}
+#main > article > .entry-content > pre {
+    background-color: #F6F6F3;
+    padding: 1rem;
+    overflow: auto;
+}
+
+#main > article > .entry-content img {
+    max-width: 90%;
+}
+#main > article > .entry-content>blockquote{
+    margin: 1rem 0 !important;
+    /*background-color: #f5f8fc;*/
+    padding: 1rem;
+    color: #243342;
+    border-left: 4px solid #dde5f1 ;
+
+}
+#main > article > header > .entry-meta {
+    background-color: #eee;
+    padding: 0.5rem 0.2rem;
+}
+
+#main > article > header > .entry-title {
+    font-size: 1.5rem;
+}
+#main strong {
+    box-shadow: 0 -.5rem 0 0 #5bc0de inset;
+}
+#footer .site-info{
+    background-color: #eee;
+    padding: 0.5rem 0.2rem;
+}
+
+
+/*@media screen and (min-width:376px) and (max-width:414px){html{font-size:12px}}*/
+/*@media screen and (min-width:415px) and (max-width:639px){html{font-size:15px}}*/
+/*@media screen and (min-width:640px) and (max-width:719px){html{font-size:20px}}*/
+/*@media screen and (min-width:720px) and (max-width:749px){html{font-size:22.5px}}*/
+/*@media screen and (min-width:750px) and (max-width:799px){html{font-size:23.5px}}*/
+/*@media screen and (min-width:800px){html{font-size:25px}}*/
+
+
+/* PrismJS 1.15.0
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 1em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+.token.attr-name, .token.builtin, .token.char, .token.inserted, .token.selector, .token.string {
+    color: #690;
+}
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
