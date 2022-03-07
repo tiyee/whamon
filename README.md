@@ -11,7 +11,7 @@ A blog system wrote by ES6 and powered by original Node.js without any framework
 
 ## Run
 
-`node ./srcipts/index.js`
+`node ./srcipts/index.js` or `yarn start`
 
 # Example
 

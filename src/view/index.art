@@ -1,0 +1,43 @@
+{{include './header.art'  $data}}
+<header id="header">
+    <h1>
+        <a href="/" rel="home">tiyee's 微言微语</a>
+    </h1>
+    <i>记录我自己，关注互联网</i>
+
+</header>
+<main id="main">
+{{each list}}
+        <article>
+        <header class="entry-header">
+            <h2 class="entry-title">
+                <a href="/post/{{$value.id}}.html" rel="bookmark">{{$value.title}}</a>
+            </h2>
+        </header>
+        <footer class="entry-meta">
+                        <span class="posted-on">Posted on
+                            <a href="/post/{{$value.id}}.html" rel="bookmark">
+
+                                <time  class="entry-date" datetime="{{$value.created.toUTCString()}}" pubdate>{{$value.created.toLocaleDateString()}}</time>
+                            </a>
+                        </span>
+                        <span class="tags-links">Tagged
+                        {{each $value.tags}}
+<a title="{{$value.title}}" href="{{$value.url}}" rel="tag">{{$value.text}}</a>,
+                           {{/each}}
+
+                                         
+                
+                        </span>
+                        <span class="comments-link">
+                            <a href="/post/{{$value.id}}.html#comments">
+                               有0条评论</a>
+                        </span>
+        </footer>
+
+    </article>
+
+    {{/each}}
+      
+</main>
+{{include './footer.art'}}

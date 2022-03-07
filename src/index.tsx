@@ -2,4 +2,4 @@
 
 import {start} from 'server'
 
-start('localhost', 3000)
+start('127.0.0.1', 3000)

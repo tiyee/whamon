@@ -3,7 +3,6 @@
 import {IncomingMessage, ServerResponse} from 'http'
 import {URL, URLSearchParams} from 'url'
 import {TimeoutCtr} from './helper'
-import ejs from 'ejs'
 // refferrer: github.com/node-formidable/formidable
 const ctxPool = new Array<IContext>()
 export const getCtx = (request: IncomingMessage, response: ServerResponse): IContext => {
@@ -24,9 +23,12 @@ export interface IContext {
     getFormPost(key: string, de?: string): Promise<string | null>
     getFormPostAll(): Promise<IterableIterator<[string, string]>>
     getBody(): Promise<Buffer>
+    Status(httpStatus: number): Promise<IContext>
     Success(msg: string, data: any): Promise<IContext>
     Error(errorCode: number, msg: string, data: any): Promise<IContext>
     Render(fileName: string, obj: object): Promise<IContext>
+    Html(s: string): Promise<IContext>
+    End(s?: string): Promise<IContext>
 }
 class Context implements IContext {
     request: IncomingMessage
@@ -47,7 +49,7 @@ class Context implements IContext {
     }
     public setTarceId(tid: string) {
         if (tid === '') {
-            this.traceId = 'xxx'
+            this.traceId = 'xxxlk'
         }
     }
     private parseUrl() {
@@ -109,18 +111,19 @@ class Context implements IContext {
 
         return this.formData.entries()
     }
-    async Json(data: Object | Map<string, any>) {
+    async Status(httpStatus: number): Promise<IContext> {
+        this.response.writeHead(httpStatus)
+        return this
+    }
+    async Json(data: object) {
         this.response.writeHead(200, {'Content-Type': 'application/json'})
+        console.log(JSON.stringify(data))
         this.response.write(JSON.stringify(data))
         this.response.end()
         return this
     }
     async Success(msg: string, data: any) {
-        const body = new Map<string, any>([
-            ['error', 0],
-            ['message', msg],
-            ['data', data],
-        ])
+        const body = {error: 0, message: msg, data}
         return this.Json(body)
     }
     async Error(errorCode: number, msg: string, data: any) {
@@ -132,10 +135,16 @@ class Context implements IContext {
         return this.Json(body)
     }
     async Render(fileName: string, obj: object): Promise<IContext> {
-        const html = ejs.render('<%= people.join(", "); %>', obj)
-        this.response.writeHead(200, {'Content-Type': 'text/plain'})
-        this.response.write(html)
+        throw new Error('ban this func')
+    }
+    async Html(s: string): Promise<IContext> {
+        this.response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+        this.response.write(s)
         this.response.end()
+        return this
+    }
+    async End(s?: string): Promise<IContext> {
+        this.response.end(s)
         return this
     }
 }

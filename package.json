@@ -7,12 +7,13 @@
     "author": "tiyee <tiyee@live.com>",
     "license": "MIT",
     "dependencies": {
-        "@types/ejs": "^3.1.0",
-        "ejs": "latest",
+        "art-template": "latest",
+        "html-minifier": "^4.0.0",
         "mysql": "latest"
     },
     "scripts": {
         "pro": "export NODE_ENV=production; webpack   --mode=production",
+        "start": "node ./scripts/index.js",
         "dev": "export NODE_ENV=development; webpack --mode=development "
     },
     "engines": {
@@ -21,10 +22,10 @@
     "devDependencies": {
         "@babel/core": "latest",
         "@babel/preset-env": "latest",
-        "@types/mysql": "^2.15.21",
-        "@types/qs": "^6.9.7",
+        "@types/mysql": "latest",
         "@typescript-eslint/eslint-plugin": "latest",
         "@typescript-eslint/parser": "latest",
+        "art-template-loader": "latest",
         "babel-loader": "latest",
         "eslint": "latest",
         "eslint-config-prettier": "latest",

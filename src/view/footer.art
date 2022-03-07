@@ -1,0 +1,27 @@
+<footer id="footer">
+
+    <div class="site-info">
+        <a href="https://beian.miit.gov.cn"> 京ICP备11044794号-1</a>
+        <span class="sep"> | </span>
+        <a rel="nofollow" href="https://weibo.com/tiyees"> Weibo</a>
+        <span class="sep"> | </span>
+        <a rel="nofollow" href="https://github.com/tiyee"> Github</a>
+        <span class="sep"> | </span>
+        <a href="/sitemap.xml"> Sitemap</a>
+        <span class="sep"> | </span>
+        <a rel="nofollow" href="mailto:webmaster@tiyee.com.cn?subject=from blog">Mail me</a>
+        <span class="sep"> | </span>
+        <a href="/opensource.html"> Open Source</a>
+        <span class="sep"> | </span>
+        <a href="/about.html">About me</a>.		</div>
+</footer>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4a9a3e5e8950538f4a10ce44e396a0ee";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
