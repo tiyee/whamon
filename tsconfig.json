@@ -19,6 +19,7 @@
     "preserveConstEnums": true,
     "lib": ["es7", "dom","ES2020"]
   },
+  "moduleResolution": "node",
   "include": ["src"],
   "exclude": ["node_modules", "**/*.spec.ts", "webpack.config.js","dist","html","static","srcipts"]
 }

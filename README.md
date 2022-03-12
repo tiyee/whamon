@@ -12,7 +12,7 @@ A blog system wrote by ES6 and powered by original Node.js without any framework
 
 ## Import mysql
 
-Database  must be configured before start this application.
+Database  must be configured before starting this application.
 
 
 1. Exec sqlscript in ./angemon.sql

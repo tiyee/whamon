@@ -100,8 +100,7 @@ export const demoMid: RouteHandle = async (ctx: IContext): Promise<IContext> => 
     return ctx
 }
 export const tagHandle: RouteHandle = async (ctx: IContext): Promise<IContext> => {
-    let tag = await ctx.getQuery('id', '0')
-
+    let tag = ctx.getQuery('id', '0')
     tag = decodeURIComponent(tag)
     return new Promise<IContext>(resolve => {
         connection.query('SELECT id,tags,title,created from ag_post', (error, results: Post[], fields) => {

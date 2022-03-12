@@ -4,7 +4,7 @@ export const config = {
     mysql_mster: {
         host: 'localhost',
         user: 'angemon_r',
-        password: '123456',
+        password: '$NWQ5MWQwN2FkYTQ3NA',
         database: 'angemon',
         insecureAuth: true,
         flags: '-SECURE_CONNECTION',
@@ -12,7 +12,7 @@ export const config = {
     mysql_slave: {
         host: 'localhost',
         user: 'angemon_r',
-        password: '123456',
+        password: '$NWQ5MWQwN2FkYTQ3NA',
         database: 'angemon',
 
         insecureAuth: true,

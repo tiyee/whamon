@@ -1,38 +1,58 @@
 /** @format */
-
+import {WriteStream, createWriteStream} from 'fs'
+import path from 'path'
 export interface ILogger {
     error(s: string): ILogger
     warn(s: string): ILogger
     flush(): void
+    info(s: string): ILogger
+    debug(s: string): ILogger
+    fatal(s: string): ILogger
     write(s: string): void
 }
+const formater = (prefix: string, ctn: string): string => {
+    return `${prefix} ${new Date().toISOString()} ${ctn}\n`
+}
 class Log implements ILogger {
-    readonly buff: Buffer
-    private capacity
-    private size = 0
-    constructor(cap: number) {
-        this.buff = Buffer.allocUnsafe(cap)
-        this.capacity = cap
+    readonly ws: WriteStream
+    constructor(file: string) {
+        const f = path.join(process.cwd(), 'logs', file)
+        this.ws = createWriteStream(f, {flags: 'a', highWaterMark: 1024})
     }
+
     error(s: string): Log {
+        this.ws.write(formater('[ERR]', s))
         return this
     }
     warn(s: string): Log {
+        this.ws.write(formater('[WARN]', s))
+        return this
+    }
+    fatal(s: string): Log {
+        this.ws.write(formater('[FATAL]', s))
+        return this
+    }
+    info(s: string): Log {
+        this.ws.write(formater('[INFO]', s))
+
+        return this
+    }
+    debug(s: string): Log {
+        this.ws.write(formater('[DEBUG]', s))
+
         return this
     }
     flush(): void {
-        this.buff.toString()
-        this.size = 0
+        this.ws.end()
     }
     write(s: string): void {
-        let i = 0
-        while (i < s.length) {
-            const ss = s.slice(i)
-            i += this.buff.write(ss, 'utf8')
-            if (this.buff.byteLength === this.capacity) {
-                this.flush()
-            }
+        const blockSize = 128
+        const nbBlocks = Math.ceil(s.length / blockSize)
+        for (let i = 0; i < nbBlocks; i += 1) {
+            const currentBlock = s.slice(blockSize * i, Math.min(blockSize * (i + 1), s.length))
+            this.write(currentBlock)
         }
     }
 }
-export const logger = new Log(1024)
+
+export const logger = new Log('default.log')
