@@ -4,7 +4,8 @@ import {IContext} from './context'
 import {RouteHandle} from './router'
 import {connection} from 'db'
 import {Post} from './model/post'
-import {IndexRender, PostRender} from 'view'
+import {FetchAllPost} from './repository/post'
+import {IndexRender, PostRender, AboutRender, OpenSoureeRender, SiteMapRender} from 'view'
 interface retTag {
     title: string
     url: string
@@ -20,7 +21,7 @@ interface retPost extends retIndex {
     content: string
 }
 export const postHandle: RouteHandle = async (ctx: IContext): Promise<IContext> => {
-    let x = await ctx.getQuery('id', '0')
+    let x = ctx.getQuery('id', '0')
     const id = parseInt(x)
     if (id === undefined || id < 1) {
         ctx.Status(404)
@@ -64,36 +65,31 @@ export const postHandle: RouteHandle = async (ctx: IContext): Promise<IContext> 
     return promise
 }
 export const defaultHanle: RouteHandle = async (ctx: IContext): Promise<IContext> => {
-    const promise = new Promise<IContext>(resolve => {
-        connection.query('SELECT * from ag_post order by id desc', (error, results: Post[], fields) => {
-            if (error) throw error
-            const list = new Array<retIndex>()
-            results.forEach(result => {
-                const item: retIndex = {
-                    id: result.id,
-                    created: new Date(result.created * 1000),
-                    title: result.title,
+    return FetchAllPost().then(async (results: Post[]): Promise<IContext> => {
+        const list = new Array<retIndex>()
+        results.forEach(result => {
+            const item: retIndex = {
+                id: result.id,
+                created: new Date(result.created * 1000),
+                title: result.title,
 
-                    tags: result.tags.split(',').map(tag => {
-                        return {
-                            title: tag,
-                            url: `/tag/${encodeURIComponent(tag)}.html`,
-                            text: tag,
-                        }
-                    }),
-                }
-                list.push(item)
-            })
-            const meta = {
-                title: `首页 - tiyee's 微言微语`,
-                keywords: '',
-                content: '',
+                tags: result.tags.split(',').map(tag => {
+                    return {
+                        title: tag,
+                        url: `/tag/${encodeURIComponent(tag)}.html`,
+                        text: tag,
+                    }
+                }),
             }
-            resolve(ctx.Html(IndexRender({list, meta})))
+            list.push(item)
         })
+        const meta = {
+            title: `首页 - tiyee's 微言微语`,
+            keywords: '',
+            content: '',
+        }
+        return ctx.Html(IndexRender({list, meta}))
     })
-
-    return promise
 }
 export const demoMid: RouteHandle = async (ctx: IContext): Promise<IContext> => {
     console.log('demo midleware')
@@ -134,5 +130,49 @@ export const tagHandle: RouteHandle = async (ctx: IContext): Promise<IContext> =
             }
             resolve(ctx.Html(IndexRender({list, meta})))
         })
+    })
+}
+export const aboutHandle: RouteHandle = async (ctx: IContext): Promise<IContext> => {
+    const meta = {
+        title: `关于 - tiyee's 微言微语`,
+        keywords: '',
+        content: '',
+    }
+    const info = {}
+    return ctx.Html(AboutRender({info, meta}))
+}
+export const openSourceHandle: RouteHandle = async (ctx: IContext): Promise<IContext> => {
+    const meta = {
+        title: `开源项目 - tiyee's 微言微语`,
+        keywords: '',
+        content: '',
+    }
+    const info = {}
+    return ctx.Html(OpenSoureeRender({info, meta}))
+}
+export const siteMap: RouteHandle = async (ctx: IContext): Promise<IContext> => {
+    return FetchAllPost().then(async (results: Post[]): Promise<IContext> => {
+        const list = new Array<retIndex>()
+        let maxTime = 0
+        results.forEach(result => {
+            const item: retIndex = {
+                id: result.id,
+                created: new Date(result.created * 1000),
+                title: result.title,
+
+                tags: [],
+            }
+            maxTime = Math.max(maxTime, result.created)
+            list.push(item)
+        })
+        const meta = {
+            title: `tiyee's 微言微语`,
+            lastModify: new Date(maxTime * 1000),
+            keywords: '',
+            content: '',
+        }
+        return (await ctx.Render(200, SiteMapRender({list, meta}), {'Content-Type': 'text/xml;charset=UTF-8'})).Status(
+            200,
+        )
     })
 }

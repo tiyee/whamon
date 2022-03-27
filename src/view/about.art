@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <link rel="canonical" href="/about.html" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://o.tiyee.net/i/favicon.ico" />
+    <link rel="mask-icon" sizes="any" href="https://o.tiyee.net/i/logo.svg" color="black" />
+    <title>关于</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: #fff;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .system-message {
+            padding: 24px 48px;
+        }
+
+        .system-message h1 {
+            font-size: 64px;
+            font-weight: normal;
+            line-height: 81px;
+            margin-bottom: 12px;
+        }
+
+        .system-message .jump {
+            padding-top: 10px
+        }
+
+        .system-message .jump a {
+            color: #333;
+        }
+
+        .system-message .success, .system-message .error {
+            line-height: 1.8em;
+            font-size: 36px
+        }
+
+        .system-message .detail {
+            font-size: 12px;
+            line-height: 20px;
+            margin-top: 12px;
+            display: none
+        }
+    </style>
+</head>
+<body>
+<div class="system-message">
+    <h1>(￣_,￣ )</h1>
+    <p class="success">三十而立矣 ！</p>
+    <p class="success">四十不惑兮 ？ </p>
+    <p class="detail"></p>
+
+</div>
+
+{{include './footer.art'}}

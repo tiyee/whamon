@@ -2,8 +2,8 @@
 
 import {IncomingMessage, ServerResponse} from 'http'
 import {URL, URLSearchParams} from 'url'
+import {OutgoingHttpHeader, OutgoingHttpHeaders} from 'http'
 import {TimeoutCtr} from './helper'
-// refferrer: github.com/node-formidable/formidable
 const ctxPool = new Array<IContext>()
 export const getCtx = (request: IncomingMessage, response: ServerResponse): IContext => {
     if (ctxPool.length > 0) {
@@ -24,9 +24,10 @@ export interface IContext {
     getFormPostAll(): Promise<IterableIterator<[string, string]>>
     getBody(): Promise<Buffer>
     Status(httpStatus: number): Promise<IContext>
+
     Success(msg: string, data: any): Promise<IContext>
     Error(errorCode: number, msg: string, data: any): Promise<IContext>
-    Render(fileName: string, obj: object): Promise<IContext>
+    Render(statusCode: number, s: string, headers?: OutgoingHttpHeaders | OutgoingHttpHeader[]): Promise<IContext>
     Html(s: string): Promise<IContext>
     End(s?: string): Promise<IContext>
 }
@@ -35,6 +36,7 @@ class Context implements IContext {
     response: ServerResponse
     private urlObj?: URL
     private traceId: string = ''
+    private isEnd = false
     private body: Buffer | null = null
     private formData: URLSearchParams | null = null
 
@@ -115,9 +117,9 @@ class Context implements IContext {
         this.response.writeHead(httpStatus)
         return this
     }
+
     async Json(data: object) {
         this.response.writeHead(200, {'Content-Type': 'application/json'})
-        console.log(JSON.stringify(data))
         this.response.write(JSON.stringify(data))
         this.response.end()
         return this
@@ -134,17 +136,44 @@ class Context implements IContext {
         ])
         return this.Json(body)
     }
-    async Render(fileName: string, obj: object): Promise<IContext> {
-        throw new Error('ban this func')
+    async Render(
+        statusCode: number,
+        s: string,
+        headers?: OutgoingHttpHeaders | OutgoingHttpHeader[],
+    ): Promise<IContext> {
+        this.runIfNotEnd(() => {
+            this.response.writeHead(statusCode, headers)
+            this.response.write(s)
+            this.response.end()
+        })
+
+        return this
     }
     async Html(s: string): Promise<IContext> {
-        this.response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-        this.response.write(s)
-        this.response.end()
+        this.runIfNotEnd(() => {
+            this.response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+            this.response.write(s)
+            this.response.end()
+        })
+
         return this
     }
     async End(s?: string): Promise<IContext> {
-        this.response.end(s)
+        this.runIfNotEnd(() => {
+            this.response.end(s)
+            this.isEnd = true
+        })
+
         return this
+    }
+    async runIfNotEnd(fn: CallableFunction): Promise<IContext> {
+        if (!this.isEnd) {
+            fn()
+            return this
+        }
+        return this
+    }
+    IsEnd = (): boolean => {
+        return this.isEnd
     }
 }

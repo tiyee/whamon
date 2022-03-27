@@ -12,6 +12,11 @@
     <link rel="canonical" href="https://www.tiyee.net/" />
     <title>{{meta.title}}</title>
     <meta name="renderer" content="webkit">
+    <link rel="dns-prefetch" href="//tiyee.com.cn">
+<link rel="dns-prefetch" href="//tiyee.cn">
+<link rel="dns-prefetch" href="//img.tiyee.cn">
+<link rel="dns-prefetch" href="//o.tiyee.net">
+
     <link rel="shortcut icon" type="image/x-icon" href="https://o.tiyee.net/i/favicon.ico" />
 <!--    <link rel="mask-icon" sizes="any" href="https://o.tiyee.net/i/logo.svg" color="black" />-->
     <link rel="mask-icon" sizes="any" href="https://o.tiyee.net/i/favicon.ico"  />

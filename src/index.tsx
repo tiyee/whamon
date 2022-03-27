@@ -17,4 +17,5 @@ process.on('beforeExit', code => {
 
 process.on('exit', code => {
     console.log('Process exit event with code: ', code)
+    logger.fatal('exit: ' + code.toString())
 })
