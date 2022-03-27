@@ -46,6 +46,7 @@ class Context implements IContext {
         this.response = response
     }
     public reset(request: IncomingMessage, response: ServerResponse) {
+         this.isEnd = false
         this.request = request
         this.response = response
     }
