@@ -24,6 +24,8 @@ export interface IContext {
     getFormPostAll(): Promise<IterableIterator<[string, string]>>
     getBody(): Promise<Buffer>
     Status(httpStatus: number): Promise<IContext>
+    Abort(): Promise<IContext>
+    SetHeader(name: string, value: string): Promise<IContext>
 
     Success(msg: string, data: any): Promise<IContext>
     Error(errorCode: number, msg: string, data: any): Promise<IContext>
@@ -46,7 +48,7 @@ class Context implements IContext {
         this.response = response
     }
     public reset(request: IncomingMessage, response: ServerResponse) {
-         this.isEnd = false
+        this.isEnd = false
         this.request = request
         this.response = response
     }
@@ -119,6 +121,10 @@ class Context implements IContext {
         return this
     }
 
+    async SetHeader(name: string, value: string): Promise<IContext> {
+        this.response.setHeader(name, value)
+        return this
+    }
     async Json(data: object) {
         this.response.writeHead(200, {'Content-Type': 'application/json'})
         this.response.write(JSON.stringify(data))
@@ -176,5 +182,10 @@ class Context implements IContext {
     }
     IsEnd = (): boolean => {
         return this.isEnd
+    }
+    async Abort(): Promise<IContext> {
+        return new Promise(resolve => {
+            resolve(this)
+        })
     }
 }
