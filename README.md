@@ -36,6 +36,10 @@ Database  must be configured before starting this application.
                 proxy_pass http://127.0.0.1:3000/tag?id=$1;
             }
         }
+        location  ~* ^/(about|opensource|sitemap)\.(html|xml)$ {
+            proxy_pass http://127.0.0.1:3000/$1;
+
+        }
 ```
 
 ## Run
